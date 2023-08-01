@@ -10,7 +10,9 @@ public class Cliente{
     private int anoNascimento;
     private boolean especial;
     
-    public Cliente(){ //método construtor. Não pode colocar o tipo do retorno (void, etc). Se o método não for incluso, fica implícito sem nada adicional
+    public Cliente(){ 
+        //Construtores devem ter o mesmo nome da Classe!
+        //método construtor. Não pode colocar o tipo do retorno (void, etc). Se o método não for incluso, fica implícito sem nada adicional
         //construtuores podem ser usados para inicialização de variáveis com valores padrão de acordo com alguma lógica ou para imprimir mensagens, por exemplo
         System.out.println("Criando um objeto Cliente.");
     }
@@ -91,8 +93,4 @@ public class Cliente{
         this.especial = especial;
   
     }
-    
- 
-
-
 }
