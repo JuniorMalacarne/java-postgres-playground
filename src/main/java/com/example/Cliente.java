@@ -3,6 +3,8 @@ package com.example;
 public class Cliente{
     //variáveis criadas no nível da classe, chamadas de atributos. Qualquer função da classe consegue acessar essas variáveis
     private String nome;
+    private String cpf;
+    private String cidade;
     private double renda; 
     private char sexo;
     private int anoNascimento;
@@ -13,11 +15,16 @@ public class Cliente{
         System.out.println("Criando um objeto Cliente.");
     }
 
-    public Cliente(double renda, char sexo){
+    public Cliente(String nome, String cpf, String cidade, double renda, char sexo, int anoNascimento, boolean especial){
         this(); //chamando um outro método construtor (para evitar duplicação de código e poder generalizar alterações)
         //this.renda = renda; // jeito padrão para atribuir valor para o parâmetro
-        setRenda(renda); // chamando o método Set para aplicar a lógica do método ao atribuir valor ao parâmetro
+        setNome(nome); // chamando o método Set para aplicar a lógica do método ao atribuir valor ao parâmetro
+        setCpf(cpf);
+        setCidade(cidade);
+        setRenda(renda);
         setSexo(sexo);
+        setAnoNascimento(anoNascimento);
+        setEspecial(especial);
     }
 
     public String getNome() {
@@ -25,7 +32,27 @@ public class Cliente{
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        if (nome.isBlank())
+            System.out.println("O nome não pode ser vazio.");
+        else this.nome = nome.toUpperCase().trim(); // colocando tudo me maiúsculo e retirando espaços periféricos
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        if (cpf.length() == 11)
+            this.cpf = cpf;
+        else System.out.println("O CPF deve conter 11 dígitos.");
+    } 
+
+    public String getCidade() {
+        return cidade;
+       }
+    
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
     public double getRenda(){
@@ -62,7 +89,10 @@ public class Cliente{
 
     public void setEspecial(boolean especial) {
         this.especial = especial;
+  
     }
+    
+ 
 
 
 }

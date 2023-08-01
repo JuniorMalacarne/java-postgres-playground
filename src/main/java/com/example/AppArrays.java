@@ -46,7 +46,7 @@ public class AppArrays {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
                 matriz[i][j] = i * matriz[i].length + j+1; // atribuindo valores em sequência **** linha (na ordem) * o "tamanho da linha" para pular o que já escreveu nas anteriores + (j+1) para preencher na sequência
-            };
+            }; // ****** MEMORIZAR ISSO AQUI!
         }
 
         for (int i = 0; i < matriz.length; i++) {
