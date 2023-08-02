@@ -93,4 +93,8 @@ public class Cliente{
         this.especial = especial;
   
     }
+
+    public String toString(){ // criando um método para utilizar se for preciso imprimir o conteúdo do objeto instanciado (mas aqui limitamos ao nome apenas)
+        return "Cliente: " + nome;
+    }
 }

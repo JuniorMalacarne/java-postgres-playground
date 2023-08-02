@@ -23,7 +23,7 @@ public class AppArrays {
         System.out.println("Posição 1 alterada: " + vetor[0]);
         */
 
-        //iniciando vetor sem atribuir diretamente os valores, mas informando a quantidade de elementos
+        //iniciando vetor sem atribuir diretamente os valores, mas é preciso informar a quantidade de elementos
         int vetor2[] = new int[5];
         for (int i = 0; i < vetor2.length; i++) {
             vetor2[i] = 100 * (i+1);
