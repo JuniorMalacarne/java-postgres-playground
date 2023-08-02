@@ -1,21 +1,26 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class AppListas {
     public static void main(String[] args) {
         //Cliente[] vetorClientes = new Cliente[5]; //sintaxe para criar/instanciar um vetor (que tem quantidade de elementos limitada ao que é declarado na instanciação)
         
-        List<Cliente> listaClientes = new ArrayList<>(); //sintaxe para criar/instanciar uma lista (que tem quantidade de elementos dinâmica)
-        
+        //List<Cliente> listaClientes = new ArrayList<>(); //sintaxe para criar/instanciar uma lista (que tem quantidade de elementos dinâmica; mas também pode ser definida entre os últimos parênteses)
+        // usar a List sem informar a quantidade de elementos pode comprometer a perfomance por causa dos processos de delimitação de quantidade de elementos 
+        // (ele inicia com 10 posições vai criando "vetores" cada vez que é acrescentado um elemento que extrapola a primeira quantidade. assim aloca quantidade maior de memória)
+
+        List<Cliente> listaClientes = new LinkedList<>(); // sintaxe para criar/instanciar uma lista verdadeiramente dinâmica (pois ela aloca memória somente a cada elemento que é incluído)
+        // a alocação de memória pode ser mais rápida mas a leitura pode ser mais lenta, pois os elementos dificilmente estarão alocados próximos um do outro na memória
         Cliente cliente1 = new Cliente();
         cliente1.setNome("João");
 
         Cliente cliente2 = new Cliente();
         cliente2.setNome("Maria");
 
-        // listas aceitam elementos duplicados (Sets não)
+        // listas aceitam elementos duplicados (Sets não...)
         listaClientes.add(cliente1);
         listaClientes.add(cliente1);
         listaClientes.add(cliente2);
