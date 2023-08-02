@@ -2,7 +2,8 @@ package com.example;
 
 public class AppClasses {
     public static void main(String[] args) { // "void" seria o "tipo" do retorno do método ("main" é o método principal). Void significa que esse retorno é vazio, ou que ele não tem um "tipo" para retornar
-        Cliente cliente1 = new Cliente(); //usando o método construtor para instanciar/criar um objeto de uma classe
+        // *tipo* (nome da Classe) *objeto* ("variável" de "tipo composto") = new *método construtor* (que deve ter o mesmo nome da classe) // sintaxe para criar/instanciar objetos
+        Cliente cliente1 = new Cliente(); //usando o método construtor padrão para instanciar/criar um objeto de uma classe
         cliente1.setNome("João");
         cliente1.setCpf("99999999999");
         cliente1.setCidade("Curitiba");
@@ -34,7 +35,7 @@ public class AppClasses {
         else System.out.println("Cliente Especial: Não.");    
         System.out.println();
 
-        if (cliente1.getCpf().equals(cliente2.getCpf())) // usar ométodo equals para comparar Strings, pois assim independe de endereços de memória
+        if (cliente1.getCpf().equals(cliente2.getCpf())) // usar o método equals para comparar Strings, pois assim independe de endereços de memória
             System.out.println("Atenção: o Cliente 1 e o Cliente 2 tem os CPFs iguais.");
         else System.out.println("O Cliente 1 e o Cliente 2 tem os CPFs diferentes.");
 

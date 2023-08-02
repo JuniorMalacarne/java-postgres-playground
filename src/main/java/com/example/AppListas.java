@@ -31,10 +31,14 @@ public class AppListas {
         listaClientes.add(cliente2);
 
         listaClientes.remove(0); // removendo um elemento de um índice determinado
+        
         listaClientes.remove(cliente1); // removendo o primeiro elemento contendo o objeto declarado
+        
         int tamanho = listaClientes.size()-1; // pegando a posição do último elemento (size retorna a quantidade total de elementos da lista)
         listaClientes.remove(tamanho); // removendo o elemento da posição armazenada na variável tamanho, nesse caso o último
+        
         System.out.println(listaClientes); // imprime a lista diretamente de uma só vez, um elemento atrás do outro
+        
         for (Cliente cliente : listaClientes) { // atalho "foreach" para percorrer listas (e vetores?). Assim podemos imprimir cada elemento invidualmente
             System.out.println(cliente);
         }

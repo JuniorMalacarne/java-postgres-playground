@@ -12,7 +12,8 @@ public class Cliente{
     
     public Cliente(){ 
         //Construtores devem ter o mesmo nome da Classe!
-        //método construtor. Não pode colocar o tipo do retorno (void, etc). Se o método não for incluso, fica implícito sem nada adicional
+        //método construtor. Não pode colocar o tipo do retorno (void, etc). 
+        //Se o método não for incluso, fica implícito sem nada adicional
         //construtuores podem ser usados para inicialização de variáveis com valores padrão de acordo com alguma lógica ou para imprimir mensagens, por exemplo
         System.out.println("Criando um objeto Cliente.");
     }

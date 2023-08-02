@@ -20,7 +20,7 @@ public class AppScanner {
         System.out.println("Digite a Renda: ");
         cliente1.setRenda(scanner.nextDouble());
 
-        scanner.nextLine();
+        scanner.nextLine(); // toda vez que tiver uma entrada de dado que não seja string, é preciso pular uma linha separadamente com esse comando
 
         System.out.println("Digite o Sexo: ");
         String sexo = scanner.nextLine();
