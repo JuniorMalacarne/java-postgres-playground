@@ -31,13 +31,11 @@ public class AppScanner {
 
         scanner.nextLine();
 
-        System.out.println("É Cliente Especial? "); // resolver problema...
-        boolean especial;
-        String eEspecial = scanner.nextLine();
-        if (eEspecial.toUpperCase().trim() == "SIM")
-            especial = true;
-        else especial = false;
-        cliente1.setEspecial(especial);
+        System.out.println("Cliente Especial?: ");
+        String especial  = scanner.nextLine().trim();
+        if (especial.equalsIgnoreCase("SIM"))
+            cliente1.setEspecial(true);
+        else cliente1.setEspecial(false);
 
         System.out.println("Cliente 1");
         System.out.println("Nome: " + cliente1.getNome());
@@ -46,7 +44,8 @@ public class AppScanner {
         System.out.println("Renda: " + cliente1.getRenda());
         System.out.println("Sexo: " + cliente1.getSexo());
         System.out.println("Ano de Nascimento: " + cliente1.getAnoNascimento());
-        if (cliente1.isEspecial()==true)
+        System.out.println(cliente1.isEspecial());
+        if (cliente1.isEspecial() == true)
             System.out.println("Cliente Especial: Sim.");
         else System.out.println("Cliente Especial: Não.");
         System.out.println();
