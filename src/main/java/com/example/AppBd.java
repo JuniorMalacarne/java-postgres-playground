@@ -23,12 +23,62 @@ public class AppBd {
             
             System.out.println("Conexão com Banco de Dados realizada com sucesso.");
 
-            listarEstados(connection);
-            localizarEstados(connection, "ES");
+            var marca = new Marca(); // instanciando uma classe marca no objeto marca
+            marca.setId(3L); // setando/indicando o id=1 da tabela marca (que já existe) para o objeto criado marca
+
+            var produto = new Produto(); // instanciando uma classe produto no objeto produto
+            produto.setId(204L); // setando/indicando o id do produto que será usando como condição para ATUALIZÁ-LO
+            produto.setMarca(marca); // setando/indicando o objeto marca como a marca do objeto produto (pois no BD é uma chave estrangeira)
+            produto.setNome("Produto Atualizado"); // setando/indicando um nome que está sendo criado para o novo objeto produto
+            produto.setValor(200.00); // setando/indicando um valor que está sendo criado para o novo objeto produto
+
+            //inserirProduto(connection, produto);
+            //excluirProduto(connection,1L);
+            alterarProduto(connection, produto);
+
+            //listarEstados(connection);
+            //localizarEstados(connection, "ES");
             listaDadosTabela(connection, "produto");
         }catch (SQLException e) { // exceção, caso não consiga conectar ao Banco de Dados ou haja alguma falha na consulta sql
                 System.err.println("Não foi possível conectar ao banco de dados: " + e.getMessage());
         } 
+    }
+
+    private void inserirProduto(Connection connection, Produto produto) {
+        var sql = "insert into produto (nome, marca_id, valor) values (?, ?, ?)";
+        try(var statement = connection.prepareStatement(sql)){
+            statement.setString(1, produto.getNome()); // o objeto produto que é passado como parâmetro no método inserirProduto é usado como parâmetro do "statement.set" para informar os valores do comando SQL
+            statement.setLong(2, produto.getMarca().getId());
+            statement.setDouble(3, produto.getValor());
+            statement.executeUpdate();
+        } catch (SQLException e){
+            System.err.println("Não foi possível executar a atualização no banco de dados: " + e.getMessage());
+        }  
+    }
+
+    private void alterarProduto(Connection connection, Produto produto) {
+        var sql = "update produto set nome = ?, marca_id = ?, valor = ? where id = ?";
+        try(var statement = connection.prepareStatement(sql)){
+            statement.setString(1, produto.getNome()); // o objeto produto que é passado como parâmetro no método inserirProduto é usado como parâmetro do "statement.set" para informar os valores do comando SQL
+            statement.setLong(2, produto.getMarca().getId());
+            statement.setDouble(3, produto.getValor());
+            statement.setLong(4, produto.getId());
+            statement.executeUpdate();
+        } catch (SQLException e){
+            System.err.println("Não foi possível executar a inserção no banco de dados: " + e.getMessage());
+        }  
+    }
+
+    private void excluirProduto(Connection connection, long id) {
+        var sql = "Delete from produto where id = ?";
+        try (var statement = connection.prepareStatement(sql)){
+            statement.setLong(1, id); // o valor da variável id que é passado como parâmetro no método inserirProduto é usado como parâmetro do "statement.set" para informar o valor do comando SQL
+            if (statement.executeUpdate() == 1) //executeUpdate retorna um número que infomra se foi executado o comando (nesse caso se encontrou um registro que atende ao comando para executá-lo)
+                System.out.println("Produto excluído com sucesso.");
+            else System.out.println("Produto não localizado.");
+        } catch (SQLException e){
+            System.err.println("Não foi possível executar a exclusão no Banco de Dados: " + e.getMessage());
+        }
     }
 
     private void listaDadosTabela(Connection connection, String tabela) {
