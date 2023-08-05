@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.model.Cliente;
+
 public class AppClasses {
     public static void main(String[] args) { // "void" seria o "tipo" do retorno do método ("main" é o método principal). Void significa que esse retorno é vazio, ou que ele não tem um "tipo" para retornar
         // *tipo* (nome da Classe) *objeto* ("variável" de "tipo composto") = new *método construtor* (que deve ter o mesmo nome da classe) // sintaxe para criar/instanciar objetos

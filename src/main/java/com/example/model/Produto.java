@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 public class Produto {
     private Long id; // ao usar a classe Long ao invés do tipo primitivo long, posso iniciá-lo como null

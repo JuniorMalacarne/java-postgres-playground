@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.example.model.Cliente;
+
 public class AppListas {
     public static void main(String[] args) {
         //Cliente[] vetorClientes = new Cliente[5]; //sintaxe para criar/instanciar um vetor (que tem quantidade de elementos limitada ao que é declarado na instanciação)

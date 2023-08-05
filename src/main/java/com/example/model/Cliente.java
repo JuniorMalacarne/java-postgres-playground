@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 public class Cliente{
     //variáveis criadas no nível da classe, chamadas de atributos. Qualquer função da classe consegue acessar essas variáveis

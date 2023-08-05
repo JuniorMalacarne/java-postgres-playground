@@ -3,6 +3,8 @@ package com.example;
 import java.util.Scanner; // como Scanner já é uma classe própria do Java que está em um pacote especifico (java.util) fora do pacote atual, foi preciso importá-la aqui nesse aqrquivo
 // a System também é um classe pronta do Java, que está no pacote java.lang também fora do pacote atual, mas não é preciso importar nada que está nesse pacote
 
+import com.example.model.Cliente;
+
 public class AppScanner {
     public static void main(String[] args) { 
         Cliente cliente1 = new Cliente();
