@@ -11,7 +11,7 @@ import com.example.model.Estado;
 public class EstadoDAO extends DAO { //extends torna a classe filha de uma superclasse (DAO) - Herança
     
     public EstadoDAO(Connection connection) { //construtor
-        super(connection); // chamando o construtor da superclasse DAO
+        super(connection); // chamando o atributo do construtor da superclasse DAO
     }
 
     public void inserir(Estado estado) {
@@ -43,10 +43,10 @@ public class EstadoDAO extends DAO { //extends torna a classe filha de uma super
         }  
     }
 
-    public void excluir(long id) {
+    public void excluir(Estado estado) {
         var sql = "Delete from estado where id = ?";
         try (var statement = connection.prepareStatement(sql)){
-            statement.setLong(1, id); // o valor da variável id que é passado como parâmetro no método inserirestado é usado como parâmetro do "statement.set" para informar o valor do comando SQL
+            statement.setLong(1, estado.getId()); 
             if (statement.executeUpdate() == 1) //executeUpdate retorna um número que infomra se foi executado o comando (nesse caso se encontrou um registro que atende ao comando para executá-lo)
                 System.out.println("estado excluído com sucesso.");
             else System.out.println("estado não localizado.");
@@ -85,7 +85,7 @@ public class EstadoDAO extends DAO { //extends torna a classe filha de uma super
         return lista;       
     }
 
-    public void localizar(String uf) {
+    public void localizar(Estado estado) {
         try {
             /*
             var statement = connection.createStatement(); // createStatement não recebe uma SQL
@@ -97,12 +97,12 @@ public class EstadoDAO extends DAO { //extends torna a classe filha de uma super
 
             var sql = "select * from estado where uf = ?";
             var statement = connection.prepareStatement(sql); // o prepareStatement cria uma consulta preparada (ele verifica se a consulta está correta) e ela não vai ser alterada. Apenas pode-se alterar o valor dos parâmetros            
-            statement.setString(1, uf); //os métodos set colocam a string no parâmetro (da sql) da ordem do número declarado
+            statement.setString(1, estado.getUf()); //os métodos set colocam a string no parâmetro (da sql) da ordem do número declarado
             var result = statement.executeQuery();
             
             if (result.next())
                 System.out.printf("Id: %d Nome: %s UF: %s Regiao_Id: %d Area_km2: %d Populacao: %d\n", result.getInt("id"), result.getString("nome"), result.getString("uf"), result.getInt("regiao_id"), result.getInt("area_km2"), result.getInt("populacao"));
-            else System.out.println("Estado não localizado: " + uf);
+            else System.out.println("Estado não localizado: " + estado.getUf());
             System.out.println();
         } catch (SQLException e) {
             System.err.println("Não foi possível executar a consulta ao banco de dados: " + e.getMessage());

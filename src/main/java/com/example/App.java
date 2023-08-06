@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.example.dao.ConnectionManager;
+
 public class App {
     private static final String PASSWORD = "";
     private static final String USERNAME = "gitpod";

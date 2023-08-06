@@ -3,8 +3,8 @@ package com.example.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class DAO {
-    protected Connection connection;
+public class DAO { // classe-mãe dos objetos DAO (objetos de acesso aos dados)
+    protected Connection connection; // atributo que será usado nas classes filhas também
 
     public DAO(Connection connection) {
         this.connection = connection;

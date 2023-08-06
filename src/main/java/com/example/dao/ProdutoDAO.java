@@ -10,7 +10,7 @@ import com.example.model.Produto;
 public class ProdutoDAO extends DAO { //extends torna a classe filha de uma superclasse (DAO) - Herança
 
     public ProdutoDAO(Connection connection) {
-        super(connection); // chamando o construtor da superclasse DAO
+        super(connection); // chamando o atributo do construtor da superclasse DAO
     }
 
     public void inserir(Produto produto) {
@@ -33,15 +33,18 @@ public class ProdutoDAO extends DAO { //extends torna a classe filha de uma supe
             statement.setDouble(3, produto.getValor());
             statement.setLong(4, produto.getId());
             statement.executeUpdate();
+            if (statement.executeUpdate() == 1) //executeUpdate retorna um número que infomra se foi executado o comando (nesse caso se encontrou um registro que atende ao comando para executá-lo)
+                System.out.println("Produto inserido com sucesso.");
+            else System.out.println("Produto não inserido.");
         } catch (SQLException e){
             System.err.println("Não foi possível executar a atualização no banco de dados: " + e.getMessage());
         }  
     }
 
-    public void excluir(long id) {
+    public void excluir(Produto produto) {
         var sql = "Delete from produto where id = ?";
         try (var statement = connection.prepareStatement(sql)){
-            statement.setLong(1, id); // o valor da variável id que é passado como parâmetro no método inserirProduto é usado como parâmetro do "statement.set" para informar o valor do comando SQL
+            statement.setLong(1, produto.getId()); 
             if (statement.executeUpdate() == 1) //executeUpdate retorna um número que infomra se foi executado o comando (nesse caso se encontrou um registro que atende ao comando para executá-lo)
                 System.out.println("Produto excluído com sucesso.");
             else System.out.println("Produto não localizado.");
@@ -61,13 +64,13 @@ public class ProdutoDAO extends DAO { //extends torna a classe filha de uma supe
             produto.setId(result.getLong("id"));
             produto.setNome(result.getString("nome"));
             //produto.setInt(result.getInt("marca_id"));
-            produto.setValor(result.getDouble("valor")); // não está salvando o valor
+            produto.setValor(result.getLong("Valor"));
             lista.add(produto);
         }
         return lista;
     }
 
-    public void localizar(long id) {
+    public void localizar(Produto produto) {
         var sql = "select * from produto where id = ?";
         try (var statement = connection.prepareStatement(sql)){ 
             /*
@@ -79,11 +82,11 @@ public class ProdutoDAO extends DAO { //extends torna a classe filha de uma supe
             o prepareStatement cria uma consulta preparada (ele verifica se a consulta está correta) e ela não vai ser alterada. Apenas pode-se alterar o valor dos parâmetros            
             */
 
-            statement.setLong(1, id); //os métodos set colocam a string no parâmetro (da sql) da ordem do número declarado
+            statement.setLong(1, produto.getId()); //os métodos set colocam a string no parâmetro (da sql) da ordem do número declarado
             var result = statement.executeQuery();
             
             if (result.next())
-                System.out.printf("Id: %d Nome: %s Marca_ID: %d Valor %d\n", result.getInt("id"), result.getString("nome"), result.getInt("marca_id"), result.getInt("Valor"));
+                System.out.printf("Id: %d Nome: %s Marca_ID: %d Valor %d\n", result.getInt("id"), result.getString("nome"), result.getInt("marca_id"), result.getInt("valor"));
             else System.out.println("Produto não localizado.");
             System.out.println();
         } catch (SQLException e) {

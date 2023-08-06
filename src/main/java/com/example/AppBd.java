@@ -13,7 +13,7 @@ import com.example.model.RegiaoGeografica;
 
 public class AppBd {
     public static void main(String[] args){
-        new AppBd();
+        new AppBd();        
     }
 
     public AppBd(){
@@ -25,7 +25,7 @@ public class AppBd {
             
             //System.out.println("Conexão com Banco de Dados realizada com sucesso.");
             
-            /*  CRUD com a tabela estado
+            /* CRUD com a tabela estado
             var regiao = new RegiaoGeografica();
             regiao.setId(1L);
 
@@ -37,41 +37,40 @@ public class AppBd {
             estado.setAreakm2(2777466);
             estado.setPopulacao(1584306);
             
-            //estadoDAO.alterar(estado);
-            //estadoDAO.excluir(27L);
-            //estadoDAO.inserir(estado);
-            //estadoDAO.localizar("TO");
-            */
-
             var estadoDAO = new EstadoDAO(connection);
+            //estadoDAO.alterar(estado);
+            //estadoDAO.excluir(estado);
+            //estadoDAO.inserir(estado);
+            estadoDAO.localizar(estado);
+            
             var listaEstados = estadoDAO.listar();
             for (var registroEstado : listaEstados) {
-                System.out.println(registroEstado);
+                System.out.println(registroEstado); //para imprimir o objeto diretamente dessa forma é preciso ter um método toString na classe Estado (a String fica padronizada nesse caso)
+                //System.out.println("Nome: " + registroEstado.getNome()); // dessa forma pode-se montar a String como quiser na hora de imprimir os dados, sem precisar ter criado o método toString na classe Estado
             }
+            */
 
             /*  CRUD com a tabela produto
             var marca = new Marca(); // instanciando uma classe marca no objeto marca
             marca.setId(3L); // setando/indicando o id da tabela marca (que já existe) para o objeto criado marca
 
             var produto = new Produto(); // instanciando uma classe produto no objeto produto
-            produto.setId(204L); // setando/indicando o id do produto que será usando como condição para ATUALIZÁ-LO
+            produto.setId(210L); // setando/indicando o id do produto que será usando como condição para ATUALIZÁ-LO
             produto.setMarca(marca); // setando/indicando o objeto marca como a marca do objeto produto (pois no BD é uma chave estrangeira)
-            produto.setNome("Produto Atualizado"); // setando/indicando um nome que está sendo criado para o novo objeto produto
+            produto.setNome("Produto Atualizado 5"); // setando/indicando um nome que está sendo criado para o novo objeto produto
             produto.setValor(200.00); // setando/indicando um valor que está sendo criado para o novo objeto produto
 
             var produtoDAO = new ProdutoDAO(connection);
             //produtoDAO.inserir(produto);
-            //produtoDAO.excluir(202L);
+            //produtoDAO.excluir(produto);
             //produtoDAO.alterar(produto);
-            produtoDAO.listar();
-            produtoDAO.localizar(200);
-            */
+            //produtoDAO.localizar(produto);
 
-            var produtoDAO = new ProdutoDAO(connection);
             var listaProdutos = produtoDAO.listar();
             for (var registroProduto : listaProdutos) {
                 System.out.println(registroProduto);
             }
+            */
 
             /* 
             var dao = new DAO(connection);

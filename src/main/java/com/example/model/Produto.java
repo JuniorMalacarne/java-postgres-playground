@@ -34,6 +34,6 @@ public class Produto {
     }
 
     public String toString(){
-        return "Produto: " + nome + " Id: " + id + " Valor: ";
+        return "Produto: " + nome + " Id: " + id + " Valor: " + valor;
     }
 }

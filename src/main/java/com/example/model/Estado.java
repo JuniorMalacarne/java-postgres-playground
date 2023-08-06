@@ -54,4 +54,5 @@ public class Estado {
     public String toString(){ // os métodos toString são necessários para quando for "imprimir" o conteúdo do objeto
         return "Estado: " + nome + " Id: " + id + " Uf: " + uf + " Area km2: " + areakm2 + " Populacao: " + populacao;
     }
+    
 }

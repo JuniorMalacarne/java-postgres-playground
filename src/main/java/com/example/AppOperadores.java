@@ -2,7 +2,7 @@ package com.example;
 
 public class AppOperadores {
     /*
-    // criando métodos que retornam valores lógicos e imprimem o nome do método para testar se estão sendo chamados no shoet circuit
+    // criando métodos que retornam valores lógicos e imprimem o nome do método para testar se estão sendo chamados no short circuit
     // short circuit é quando, pela tabela verdade, já se sabe o resultado da expressão lógica pelo(s) primeiro(s) valor, não é preciso calcular os valores seguintes
     boolean a(boolean valor){
         System.out.println("a");
