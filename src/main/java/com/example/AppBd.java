@@ -1,9 +1,6 @@
 package com.example;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import com.example.dao.ConnectionManager;
 import com.example.dao.DAO;
@@ -28,7 +25,7 @@ public class AppBd {
             
             //System.out.println("Conexão com Banco de Dados realizada com sucesso.");
             
-            /* CRUD co ma tabela estado
+            /*  CRUD com a tabela estado
             var regiao = new RegiaoGeografica();
             regiao.setId(1L);
 
@@ -39,18 +36,20 @@ public class AppBd {
             estado.setRegiao(regiao);
             estado.setAreakm2(2777466);
             estado.setPopulacao(1584306);
-
-            var estadoDAO = new EstadoDAO(connection);
-            estadoDAO.listar();
             
-            estadoDAO.alterar(estado);
+            //estadoDAO.alterar(estado);
             //estadoDAO.excluir(27L);
             //estadoDAO.inserir(estado);
-
-            estadoDAO.localizar("TO");
+            //estadoDAO.localizar("TO");
             */
 
-            // CRUD com a tabela produto
+            var estadoDAO = new EstadoDAO(connection);
+            var listaEstados = estadoDAO.listar();
+            for (var registroEstado : listaEstados) {
+                System.out.println(registroEstado);
+            }
+
+            /*  CRUD com a tabela produto
             var marca = new Marca(); // instanciando uma classe marca no objeto marca
             marca.setId(3L); // setando/indicando o id da tabela marca (que já existe) para o objeto criado marca
 
@@ -66,11 +65,19 @@ public class AppBd {
             //produtoDAO.alterar(produto);
             produtoDAO.listar();
             produtoDAO.localizar(200);
-
-            /*
-            var dao = new DAO(connection);
-            dao.listar("produto");
             */
+
+            var produtoDAO = new ProdutoDAO(connection);
+            var listaProdutos = produtoDAO.listar();
+            for (var registroProduto : listaProdutos) {
+                System.out.println(registroProduto);
+            }
+
+            /* 
+            var dao = new DAO(connection);
+            dao.listar("cliente");
+            */
+
         }catch (SQLException e) { // exceção, caso não consiga conectar ao Banco de Dados
                 System.err.println("Não foi possível conectar ao banco de dados: " + e.getMessage());
         } 

@@ -3,14 +3,15 @@ package com.example.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.example.model.Estado;
 
-public class EstadoDAO {
-    private Connection connection;
-
+public class EstadoDAO extends DAO { //extends torna a classe filha de uma superclasse (DAO) - Herança
+    
     public EstadoDAO(Connection connection) { //construtor
-        this.connection = connection;
+        super(connection); // chamando o construtor da superclasse DAO
     }
 
     public void inserir(Estado estado) {
@@ -54,22 +55,34 @@ public class EstadoDAO {
         }
     }
     
-    public void listar() {
-        try{ 
-            //var statement = connection.createStatement(); // método para criar uma declaração SQL através do objeto da conexão, onde cria um objeto statement
-            //var result = statement.executeQuery("select * from estado");  // com o objeto statement é possível enviar comandos para o banco de dados. A variável result vai receber esses dados
+    public List<Estado> listar() throws SQLException {
+        var lista = new LinkedList<Estado>();
+        
+        //var statement = connection.createStatement(); // método para criar uma declaração SQL através do objeto da conexão, onde cria um objeto statement
+        //var result = statement.executeQuery("select * from estado");  // com o objeto statement é possível enviar comandos para o banco de dados. A variável result vai receber esses dados
 
-            var sql = "select * from estado";
-            var statement = connection.prepareStatement(sql);
-            var result = statement.executeQuery();
+        var sql = "select * from estado";
+        var statement = connection.prepareStatement(sql);
+        var result = statement.executeQuery();
 
-            while(result.next()){
-                System.out.printf("Id: %d Nome: %s UF: %s Regiao_Id: %d Area_km2: %d Populacao: %d\n", result.getInt("id"), result.getString("nome"), result.getString("uf"), result.getInt("regiao_id"), result.getInt("area_km2"), result.getInt("populacao")); // método printf para mostrar dados "formatados" (suporta vários argumentos)
-            }
-            System.out.println();
-        }catch (SQLException e) { // exceção, caso haja alguma falha na consulta sql
-            System.err.println("Não foi possível executar a consulta ao banco de dados: " + e.getMessage());
-        }        
+        while(result.next()){ // preenchendo uma estrutura de dados em Lista. Quem chamá-lo decide o que fazer com os dados
+            var estado = new Estado();
+            estado.setId(result.getLong("id"));
+            estado.setNome(result.getString("nome"));
+            estado.setUf(result.getString("uf"));
+            //estado.setRegiao(getInt("regiao_id"));
+            //System.out.printf("Regiao %d\n", result.getInt("regiao_id"));
+            estado.setAreakm2(result.getInt("area_km2"));
+            estado.setPopulacao(result.getInt("populacao"));
+            lista.add(estado);
+        }
+        /*Código se fosse imprimir no terminal (teste) 
+        while(result.next()){
+            System.out.printf("Id: %d Nome: %s UF: %s Regiao_Id: %d Area_km2: %d Populacao: %d\n", result.getInt("id"), result.getString("nome"), result.getString("uf"), result.getInt("regiao_id"), result.getInt("area_km2"), result.getInt("populacao")); // método printf para mostrar dados "formatados" (suporta vários argumentos)
+        }
+        System.out.println();
+        */
+        return lista;       
     }
 
     public void localizar(String uf) {

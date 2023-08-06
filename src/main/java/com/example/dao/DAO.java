@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DAO {
-    private Connection connection;
+    protected Connection connection;
 
     public DAO(Connection connection) {
         this.connection = connection;

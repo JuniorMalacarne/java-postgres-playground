@@ -2,14 +2,15 @@ package com.example.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.example.model.Produto;
 
-public class ProdutoDAO {
-    private Connection connection;
+public class ProdutoDAO extends DAO { //extends torna a classe filha de uma superclasse (DAO) - Herança
 
     public ProdutoDAO(Connection connection) {
-        this.connection = connection;
+        super(connection); // chamando o construtor da superclasse DAO
     }
 
     public void inserir(Produto produto) {
@@ -49,20 +50,21 @@ public class ProdutoDAO {
         }
     }
 
-    public void listar() {
-        var sql = "select * from produto";
-        try(var statement = connection.prepareStatement(sql)){ 
-            //var statement = connection.createStatement(); // método para criar uma declaração SQL através do objeto da conexão, onde cria um objeto statement
-            //var result = statement.executeQuery("select * from estado");  // com o objeto statement é possível enviar comandos para o banco de dados. A variável result vai receber esses dados
-            
-            var result = statement.executeQuery();
-            while(result.next()){
-                System.out.printf("Id: %d Nome: %s Marca_ID: %d Valor: %d\n", result.getInt("id"), result.getString("nome"), result.getInt("marca_id"), result.getInt("Valor")); // método printf para mostrar dados "formatados" (suporta vários argumentos)
-            }
-            System.out.println();
-        }catch (SQLException e) { // exceção, caso haja alguma falha na consulta sql
-            System.err.println("Não foi possível executar a consulta ao banco de dados: " + e.getMessage());
-        }        
+    public List<Produto> listar() throws SQLException {
+        var lista = new LinkedList<Produto>();
+        var sql = "select * from produto"; 
+        var statement = connection.prepareStatement(sql); // método para criar uma declaração SQL através do objeto da conexão, onde cria um objeto statement
+        var result = statement.executeQuery();
+        
+        while(result.next()){
+            var produto = new Produto();
+            produto.setId(result.getLong("id"));
+            produto.setNome(result.getString("nome"));
+            //produto.setInt(result.getInt("marca_id"));
+            produto.setValor(result.getDouble("valor")); // não está salvando o valor
+            lista.add(produto);
+        }
+        return lista;
     }
 
     public void localizar(long id) {
